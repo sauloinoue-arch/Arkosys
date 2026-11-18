@@ -1,5 +1,6 @@
 // Roteador único da API (uma função Vercel, ver api/index.js).
 // R1: toda regra de negócio está nos módulos de `server/rotas`; a tela só chama estes endereços.
+import { sql } from 'drizzle-orm';
 import { ErroApi, erros } from './core/erros.js';
 import { exigirEscopo } from './core/escopos.js';
 import { executarEscrita } from './core/operacao.js';
@@ -34,6 +35,13 @@ export function criarApp({ db, resolverConsumidor, agora = () => new Date() }) {
       const url = new URL(request.url);
       const path = url.pathname.replace(/\/+$/, '');
       const rota = rotas.find((r) => r.metodo === request.method && r.casar(path));
+      // Verificação de saúde: confirma que a API sobe e que a conexão com o banco funciona.
+      // Pública e sem dados — devolve só "ok" e o tempo da consulta.
+      if (request.method === 'GET' && path === '/api/saude') {
+        const inicio = Date.now();
+        await db.execute(sql`select 1`);
+        return json(200, { status: 'ok', banco: 'ok', ms: Date.now() - inicio });
+      }
       if (!rota) return json(404, { codigo: 'rota_inexistente', mensagem: 'Endereço não encontrado.', campo: null });
       const params = rota.casar(path);
 

@@ -218,3 +218,9 @@ test('Prazos: 2ª parcela vence 5 dias úteis após o aceite (pula fim de semana
 test('Prazos: garantia de 30 dias contados do aceite', () => {
   assert.equal(paraIso(fimGarantia({ dataAceite: '2026-12-11', diasGarantia: 30 })), '2027-01-10');
 });
+
+test('Saúde: /api/saude responde sem login e confirma o banco', async () => {
+  const r = await app.handle(new Request('http://local/api/saude'));
+  assert.equal(r.status, 200);
+  assert.equal((await r.json()).banco, 'ok');
+});
