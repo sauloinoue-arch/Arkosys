@@ -1,0 +1,20 @@
+node_modules
+dist
+dist-ssr
+*.local
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+.vercel
+
+# Credenciais nunca vão para o repositório (Restrição 11)
+.env
+.env.*
+!.env.exemplo
