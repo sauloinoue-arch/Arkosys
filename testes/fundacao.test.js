@@ -224,3 +224,11 @@ test('Saúde: /api/saude responde sem login e confirma o banco', async () => {
   assert.equal(r.status, 200);
   assert.equal((await r.json()).banco, 'ok');
 });
+
+test('Conexão: endereço do banco malformado é recusado sem repetir o valor', async () => {
+  const { validarEndereco } = await import('../server/db/cliente.js');
+  const ruim = 'postgresql://postgres.x:XyZ9@q#Wk@aws-0-sa-east-1.pooler.supabase.com:6543/postgres';
+  assert.throws(() => validarEndereco(ruim), (e) => !e.message.includes('XyZ9') && !e.message.includes('Wk') && e.message.startsWith('DATABASE_URL'));
+  assert.doesNotThrow(() => validarEndereco('postgresql://postgres.x:SenhaSegura123@aws-0-sa-east-1.pooler.supabase.com:6543/postgres'));
+  assert.throws(() => validarEndereco('postgresql://postgres:abc@db.x.supabase.co:5432/postgres'));
+});

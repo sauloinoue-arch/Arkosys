@@ -75,7 +75,11 @@ export function criarApp({ db, resolverConsumidor, agora = () => new Date() }) {
     } catch (e) {
       if (e instanceof ErroApi) return json(e.status, e.corpo());
       // Registra a causa técnica (código e mensagem do banco), nunca credenciais.
-      console.error('[api] erro inesperado', e?.message?.split('\n')[0], '| causa:', e?.cause?.code ?? e?.code, e?.cause?.message ?? '');
+      // Só o código técnico e mensagens nossas. A mensagem bruta do driver pode conter
+      // trechos do endereço do banco (e, se ele estiver malformado, da senha).
+      const codigo = e?.cause?.code ?? e?.code ?? 'sem_codigo';
+      const nossa = String(e?.message ?? '').startsWith('DATABASE_URL') ? e.message : '';
+      console.error('[api] erro inesperado | código:', codigo, nossa);
       return json(500, { codigo: 'erro_interno', mensagem: 'Erro interno.', campo: null });
     }
   }
