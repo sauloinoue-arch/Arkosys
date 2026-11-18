@@ -74,7 +74,8 @@ export function criarApp({ db, resolverConsumidor, agora = () => new Date() }) {
       return json(repetida ? 200 : rota.statusCriacao ?? 200, resposta);
     } catch (e) {
       if (e instanceof ErroApi) return json(e.status, e.corpo());
-      console.error('[api] erro inesperado', e?.message);
+      // Registra a causa técnica (código e mensagem do banco), nunca credenciais.
+      console.error('[api] erro inesperado', e?.message?.split('\n')[0], '| causa:', e?.cause?.code ?? e?.code, e?.cause?.message ?? '');
       return json(500, { codigo: 'erro_interno', mensagem: 'Erro interno.', campo: null });
     }
   }
