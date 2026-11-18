@@ -17,4 +17,4 @@ dist-ssr
 # Credenciais nunca vão para o repositório (Restrição 11)
 .env
 .env.*
-!.env.exemplo
+# modelo das variáveis: variaveis-ambiente.exemplo
