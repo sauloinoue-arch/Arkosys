@@ -7,6 +7,9 @@ import { executarEscrita } from './core/operacao.js';
 import { tempoLancamento } from './db/schema.js';
 import { rotasContatos } from './rotas/contatos.js';
 import { rotasOportunidades } from './rotas/oportunidades.js';
+import { rotasDocumentos } from './rotas/documentos.js';
+import { rotasContratos } from './rotas/contratos.js';
+import { rotasAlertas } from './rotas/alertas.js';
 
 const json = (status, corpo) => new Response(JSON.stringify(corpo), {
   status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' },
@@ -27,8 +30,8 @@ function compilar(caminho) {
  * @param {(req: Request) => Promise<object|null>} cfg.resolverConsumidor
  * @param {() => Date} [cfg.agora]
  */
-export function criarApp({ db, resolverConsumidor, agora = () => new Date() }) {
-  const rotas = [...rotasContatos, ...rotasOportunidades].map((r) => ({ ...r, casar: compilar(r.caminho) }));
+export function criarApp({ db, resolverConsumidor, armazenamento = null, agora = () => new Date() }) {
+  const rotas = [...rotasContatos, ...rotasOportunidades, ...rotasDocumentos, ...rotasContratos, ...rotasAlertas].map((r) => ({ ...r, casar: compilar(r.caminho) }));
 
   async function handle(request) {
     try {
@@ -53,7 +56,7 @@ export function criarApp({ db, resolverConsumidor, agora = () => new Date() }) {
         try { dados = await request.json(); } catch { throw erros.validacao('Corpo JSON inválido.', null); }
       }
       const via = definirVia(consumidor, request.headers.get('x-via'));
-      const ctx = { db, consumidor, params, query: url.searchParams, dados, agora: agora(), request, via };
+      const ctx = { db, consumidor, params, query: url.searchParams, dados, agora: agora(), request, via, armazenamento };
 
       if (!rota.escrita) return json(200, await rota.executar(ctx));
 

@@ -4,13 +4,14 @@
 import { criarApp } from '../server/app.js';
 import { obterDb } from '../server/db/cliente.js';
 import { resolvedorSupabase } from '../server/core/auth.js';
+import { armazenamentoSupabase } from '../server/core/armazenamento.js';
 
 let app;
 export default {
   async fetch(request) {
     if (!app) {
       const db = obterDb();
-      app = criarApp({ db, resolverConsumidor: resolvedorSupabase(db) });
+      app = criarApp({ db, resolverConsumidor: resolvedorSupabase(db), armazenamento: armazenamentoSupabase() });
     }
     return app.handle(request);
   },
