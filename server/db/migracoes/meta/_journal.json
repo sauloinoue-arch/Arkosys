@@ -22,6 +22,20 @@
       "when": 1794962878165,
       "tag": "0002_search_path",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1795094719949,
+      "tag": "0003_troca_senha",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1795094720636,
+      "tag": "0004_tabela_precos_v1",
+      "breakpoints": true
     }
   ]
 }

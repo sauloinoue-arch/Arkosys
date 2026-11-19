@@ -55,10 +55,13 @@ export async function executarEscrita(db, { consumidor, chave, operacao, dados, 
       });
     };
 
-    const resposta = await executar(tx, registrar);
+    const bruta = await executar(tx, registrar);
+    // Campos sensíveis (ex.: link de convite) voltam só na primeira resposta e não ficam guardados.
+    const { _naoGuardar = [], ...resposta } = bruta ?? {};
+    const guardada = Object.fromEntries(Object.entries(resposta).filter(([k]) => !_naoGuardar.includes(k)));
 
     await tx.insert(chaveIdempotencia).values({
-      chave, consumidor: consumidorChave, operacao, hashRequisicao, resposta,
+      chave, consumidor: consumidorChave, operacao, hashRequisicao, resposta: guardada,
     });
     return { resposta, repetida: false };
   });

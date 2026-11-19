@@ -21,5 +21,6 @@ export const erros = {
   chaveReutilizada: () => new ErroApi(409, 'chave_reutilizada_com_dados_diferentes', 'Esta chave já foi usada com outros dados.', 'Idempotency-Key'),
   documentoObrigatorio: (tipo) => new ErroApi(409, 'documento_obrigatorio_ausente', `Falta anexar o documento "${tipo}".`),
   conflito: (mensagem, campo) => new ErroApi(409, 'conflito', mensagem, campo),
+  trocaDeSenha: () => new ErroApi(403, 'troca_de_senha_obrigatoria', 'Troque a senha inicial antes de continuar.'),
   limite: () => new ErroApi(429, 'limite_de_envios', 'Muitas tentativas. Tente novamente mais tarde.'),
 };

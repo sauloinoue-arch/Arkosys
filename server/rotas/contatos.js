@@ -4,7 +4,8 @@ import { desc, eq } from 'drizzle-orm';
 import { contato, oportunidade } from '../db/schema.js';
 import { erros } from '../core/erros.js';
 import { validar } from '../core/validar.js';
-import { ESTADOS_ENTRADA } from '../regras/funil.js';
+import { ESTADOS_ENTRADA, proximosEstados } from '../regras/funil.js';
+import { contrato, orcamento } from '../db/schema.js';
 
 const ORIGENS_MANUAIS = ['ia_generativa', 'instagram', 'google_ads', 'whatsapp', 'indicacao', 'presencial'];
 
@@ -55,7 +56,14 @@ export const rotasContatos = [
       const [c] = await db.select().from(contato).where(eq(contato.id, params.id));
       if (!c) throw erros.naoEncontrado('Contato');
       const ops = await db.select().from(oportunidade).where(eq(oportunidade.contatoId, c.id));
-      return { contato: c, oportunidades: ops };
+      const contratos = await db.select({ id: contrato.id, oportunidadeId: contrato.oportunidadeId, estadoProjeto: contrato.estadoProjeto })
+        .from(contrato).where(eq(contrato.contatoId, c.id));
+      const orcamentos = await db.select().from(orcamento).where(eq(orcamento.contatoId, c.id));
+      return {
+        contato: c,
+        oportunidades: ops.map((o) => ({ ...o, proximosEstados: proximosEstados(o), podeRegistrarContrato: o.estado === 'proposta_contrato_enviados' })),
+        contratos, orcamentos, podeLiberarAcesso: contratos.length > 0 && Boolean(c.email),
+      };
     },
   },
 ];

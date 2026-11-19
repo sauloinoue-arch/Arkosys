@@ -10,7 +10,10 @@ export async function carregarConsumidor(db, usuarioId) {
   if (!u || !u.ativo) return null;
   const linhas = await db.select({ escopo: usuarioEscopo.escopo }).from(usuarioEscopo)
     .where(eq(usuarioEscopo.usuarioId, usuarioId));
-  return { id: u.id, tipo: u.tipo, clienteId: u.clienteId, nome: u.nome, escopos: linhas.map((l) => l.escopo) };
+  return {
+    id: u.id, tipo: u.tipo, clienteId: u.clienteId, nome: u.nome, email: u.email, area: u.area,
+    deveTrocarSenha: u.deveTrocarSenha, escopos: linhas.map((l) => l.escopo),
+  };
 }
 
 /** Resolvedor de produção: valida o token no Supabase e carrega escopos do banco. */

@@ -10,6 +10,10 @@ import { rotasOportunidades } from './rotas/oportunidades.js';
 import { rotasDocumentos } from './rotas/documentos.js';
 import { rotasContratos } from './rotas/contratos.js';
 import { rotasAlertas } from './rotas/alertas.js';
+import { rotasUsuarios } from './rotas/usuarios.js';
+import { rotasPublicas } from './rotas/publico.js';
+import { rotasPortal } from './rotas/portal.js';
+import { rotasAuditoria } from './rotas/auditoria.js';
 
 const json = (status, corpo) => new Response(JSON.stringify(corpo), {
   status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' },
@@ -30,8 +34,9 @@ function compilar(caminho) {
  * @param {(req: Request) => Promise<object|null>} cfg.resolverConsumidor
  * @param {() => Date} [cfg.agora]
  */
-export function criarApp({ db, resolverConsumidor, armazenamento = null, agora = () => new Date() }) {
-  const rotas = [...rotasContatos, ...rotasOportunidades, ...rotasDocumentos, ...rotasContratos, ...rotasAlertas].map((r) => ({ ...r, casar: compilar(r.caminho) }));
+export function criarApp({ db, resolverConsumidor, armazenamento = null, autenticacaoAdmin = null, env = process.env, agora = () => new Date() }) {
+  const rotas = [...rotasContatos, ...rotasOportunidades, ...rotasDocumentos, ...rotasContratos, ...rotasAlertas,
+    ...rotasUsuarios, ...rotasPublicas, ...rotasPortal, ...rotasAuditoria].map((r) => ({ ...r, casar: compilar(r.caminho) }));
 
   async function handle(request) {
     try {
@@ -49,14 +54,19 @@ export function criarApp({ db, resolverConsumidor, armazenamento = null, agora =
       const params = rota.casar(path);
 
       const consumidor = rota.publica ? null : await resolverConsumidor(request);
-      if (!rota.publica) exigirEscopo(consumidor, rota.escopo);
+      if (!rota.publica) {
+        if (!consumidor) throw erros.naoAutenticado();
+        if (rota.escopo) exigirEscopo(consumidor, rota.escopo);
+        // Senha inicial provisória: até trocar, só /api/eu e /api/eu/senha funcionam.
+        if (consumidor.deveTrocarSenha && !rota.permiteSenhaProvisoria) throw erros.trocaDeSenha();
+      }
 
       let dados = null;
       if (rota.escrita) {
         try { dados = await request.json(); } catch { throw erros.validacao('Corpo JSON inválido.', null); }
       }
       const via = definirVia(consumidor, request.headers.get('x-via'));
-      const ctx = { db, consumidor, params, query: url.searchParams, dados, agora: agora(), request, via, armazenamento };
+      const ctx = { db, consumidor, params, query: url.searchParams, dados, agora: agora(), request, via, armazenamento, autenticacaoAdmin, env };
 
       if (!rota.escrita) return json(200, await rota.executar(ctx));
 

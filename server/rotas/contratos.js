@@ -59,6 +59,16 @@ async function mudarEstado(db, registrar, c, para, extra = {}) {
   return novo;
 }
 
+/** Ações que a API aceitaria agora, para a tela só exibir os botões válidos (R1). */
+export function acoesDoContrato(c, suspensoes, manutencoes) {
+  const acoes = [];
+  if (c.estadoProjeto === 'em_desenvolvimento') acoes.push('abrir_suspensao', 'comunicar_entrega');
+  if (c.estadoProjeto === 'prazo_suspenso' && suspensoes.some((s) => !s.fim)) acoes.push('encerrar_suspensao');
+  if (c.estadoProjeto === 'aguardando_aceite') acoes.push('registrar_aceite');
+  if (!manutencoes.some((m) => m.ativo)) acoes.push('registrar_manutencao');
+  return acoes;
+}
+
 export function resumoContrato(c, suspensoes, hoje) {
   return {
     ...c,
@@ -120,7 +130,11 @@ export const rotasContratos = [
         db.select().from(documento).where(and(eq(documento.contratoId, c.id), isNull(documento.excluidoEm))),
         db.select().from(manutencao).where(eq(manutencao.contratoId, c.id)),
       ]);
-      return { contrato: resumoContrato(c, suspensoes, agora), suspensoes, parcelas, documentos, manutencoes };
+      return {
+        contrato: resumoContrato(c, suspensoes, agora), suspensoes, documentos, manutencoes,
+        parcelas: parcelas.map((p) => ({ ...p, podePagar: p.status === 'a_receber', podeAjustarVencimento: p.status === 'a_receber' })),
+        acoes: acoesDoContrato(c, suspensoes, manutencoes),
+      };
     },
   },
   {

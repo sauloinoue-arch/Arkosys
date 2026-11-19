@@ -42,6 +42,7 @@ export const usuario = pgTable('usuario', {
   ativo: boolean('ativo').notNull().default(true),
   liberadoPor: uuid('liberado_por'),               // sócio que liberou o acesso (cliente)
   liberadoEm: timestamp('liberado_em', { withTimezone: true }),
+  deveTrocarSenha: boolean('deve_trocar_senha').notNull().default(false), // senha inicial provisória
   criadoEm: criadoEm(),
 }, (t) => [uniqueIndex('usuario_email_uq').on(t.email)]);
 

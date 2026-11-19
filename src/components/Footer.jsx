@@ -6,7 +6,7 @@ const Footer = () => {
   const handleWhatsAppGeneralClick = (e) => {
     e.preventDefault();
     const url = createWhatsAppUrl('Olá! Gostaria de mais informações sobre o desenvolvimento de sistemas.');
-    window.open(url, '_blank', 'noopener,noreferrer');
+    if (url) window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   const handleSpecificNumberClick = (phone, e) => {
@@ -89,7 +89,8 @@ const Footer = () => {
 
       <div className="footer-bottom">
         <div className="footer-bottom-container">
-          <p>&copy; {new Date().getFullYear()} Arkosys — Desenvolvimento de Sistemas. Todos os direitos reservados.</p>
+          <p>&copy; {new Date().getFullYear()} Arkosys — Desenvolvimento de Sistemas. Todos os direitos reservados.
+            {' '}<a href="/privacidade">Aviso de privacidade</a> · <a href="/entrar">Área restrita</a></p>
           <div className="footer-guarantee-note">
             <span>🔒 Segurança com Criptografia SSL e Dados em Nuvem</span>
           </div>

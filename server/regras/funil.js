@@ -33,3 +33,12 @@ export function transicaoPermitida({ de, para, estadoAnterior }) {
   if (de === 'aguardando_retorno') return para === 'desistiu' || (estadoAnterior && para === estadoAnterior);
   return (SEQUENCIA[de] ?? []).includes(para);
 }
+
+// Transições que a mudança simples de estado aceita (as outras são feitas por rotas próprias:
+// 'orcamento_gerado' pelo simulador, 'contrato_assinado' pelo registro do contrato).
+const MANUAIS = ['reuniao_agendada', 'reuniao_realizada', 'proposta_contrato_enviados', 'aguardando_retorno', 'desistiu', 'cadastro_site', 'contato_recebido'];
+
+/** Lista calculada na API para a tela só exibir os botões válidos (R1). */
+export function proximosEstados(op) {
+  return MANUAIS.filter((para) => transicaoPermitida({ de: op.estado, para, estadoAnterior: op.estadoAnterior }));
+}

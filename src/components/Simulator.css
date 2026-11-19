@@ -365,3 +365,16 @@
   font-size: 11px;
   color: var(--color-text-muted);
 }
+
+/* Cadastro antes do orçamento e aviso de não vinculação */
+.simulator-cadastro { display: flex; flex-direction: column; gap: var(--spacing-3); }
+.simulator-cadastro label { display: flex; flex-direction: column; gap: var(--spacing-1); font-size: var(--font-size-label); color: var(--color-text-muted); }
+.simulator-cadastro input:not([type="checkbox"]) {
+  background: var(--color-dominant); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-lg);
+  color: var(--color-text); padding: var(--spacing-2) var(--spacing-3); font: inherit;
+}
+.simulator-cadastro input:focus { outline: 2px solid var(--color-accent); outline-offset: 1px; }
+.simulator-aceite { flex-direction: row !important; align-items: flex-start; gap: var(--spacing-2) !important; }
+.simulator-aceite a { color: var(--color-accent); text-decoration: underline; }
+.simulator-aviso { font-size: var(--font-size-label); color: var(--color-text-muted); border-left: 3px solid var(--color-accent); padding-left: var(--spacing-3); margin: var(--spacing-3) 0; }
+.simulator-erro { color: #ff5f56; font-size: var(--font-size-label); }
