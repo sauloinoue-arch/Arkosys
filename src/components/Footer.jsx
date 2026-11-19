@@ -21,15 +21,11 @@ const Footer = () => {
         {/* Brand Column */}
         <div className="footer-brand">
           <div className="footer-logo">
-            <img
-              src="/images/logo.png"
-              alt="Arkosys Tech Solutions - Desenvolvimento de Sistemas & Soluções Digitais"
-              className="footer-logo-img"
-              width="230"
-              height="50"
-              loading="lazy"
-              decoding="async"
-            />
+            <picture>
+            <source srcSet="/images/icone-512.webp" type="image/webp" />
+            <img src="/images/icone-512.png" alt="Arkosys Tech Solutions" className="footer-logo-img" width="56" height="56" decoding="async" />
+          </picture>
+          <span className="marca-texto" aria-hidden="true"><strong>ARKOSYS</strong><small>TECH SOLUTIONS</small></span>
           </div>
           <p className="footer-tagline">
             Desenvolvimento e venda de sistemas modernos de alta conversão. Estruturas robustas, seguras e prontas para escalar o seu negócio.

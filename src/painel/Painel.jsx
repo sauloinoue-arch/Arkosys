@@ -22,7 +22,13 @@ export default function Painel() {
   return (
     <div className="pn-layout">
       <aside className="pn-lateral">
-        <img src="/images/logo.png" alt="Arkosys" className="pn-logo" />
+        <span className="pn-marca">
+          <picture>
+            <source srcSet="/images/icone-512.webp" type="image/webp" />
+            <img src="/images/icone-512.png" alt="Arkosys Tech Solutions" className="pn-logo" width="40" height="40" />
+          </picture>
+          <span className="marca-texto" aria-hidden="true"><strong>ARKOSYS</strong><small>TECH SOLUTIONS</small></span>
+        </span>
         <nav>{MENU.map(([to, rotulo, fim]) => <NavLink key={to} to={to} end={fim}>{rotulo}</NavLink>)}</nav>
         <div className="pn-usuario">
           <span>{eu.email}</span>

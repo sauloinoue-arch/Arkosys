@@ -46,7 +46,13 @@ export default function Portal() {
   return (
     <div className="pn-portal">
       <header className="pn-cabecalho">
-        <img src="/images/logo.png" alt="Arkosys" className="pn-logo" />
+        <span className="pn-marca">
+          <picture>
+            <source srcSet="/images/icone-512.webp" type="image/webp" />
+            <img src="/images/icone-512.png" alt="Arkosys Tech Solutions" className="pn-logo" width="40" height="40" />
+          </picture>
+          <span className="marca-texto" aria-hidden="true"><strong>ARKOSYS</strong><small>TECH SOLUTIONS</small></span>
+        </span>
         <div><span className="pn-mudo">{eu.email}</span> <button className="btn-outline" onClick={() => sair(navegar)}>Sair</button></div>
       </header>
       <Projetos />

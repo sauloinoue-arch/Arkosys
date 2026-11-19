@@ -7,7 +7,8 @@
 .pn-texto .pn-cartao { max-width: 760px; }
 .pn-texto h2 { margin-top: var(--spacing-4); font-size: 18px; }
 .pn-cartao { background: var(--color-secondary); border: 1px solid var(--pn-borda); border-radius: var(--radius-lg); padding: var(--spacing-4); margin-bottom: var(--spacing-3); }
-.pn-logo { height: 36px; width: auto; }
+.pn-logo { height: 40px; width: 40px; border-radius: 50%; display: block; }
+.pn-marca { display: flex; align-items: center; gap: var(--spacing-2); }
 /* Logo da tela de acesso: arquivo de 512 px exibido a 132 px — nítido em telas de alta densidade. */
 .pn-logo-login { display: block; width: 132px; height: 132px; margin: 0 auto var(--spacing-2); }
 .pn-form h1 { text-align: center; }

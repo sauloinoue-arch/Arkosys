@@ -100,3 +100,9 @@ button {
   border: none;
   cursor: pointer;
 }
+
+/* Marca: nome ao lado do logo circular, nas cores do logo oficial
+   (branco + laranja de destaque, com letras espaçadas no subtítulo). */
+.marca-texto { display: flex; flex-direction: column; line-height: 1.05; }
+.marca-texto strong { color: var(--color-text); font-weight: 800; font-size: 18px; letter-spacing: 0.02em; }
+.marca-texto small { color: var(--color-accent); font-size: 9px; letter-spacing: 0.28em; margin-top: 3px; }

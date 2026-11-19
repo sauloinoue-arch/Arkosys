@@ -12,14 +12,11 @@ const Header = () => {
     <header className="header glassmorphism">
       <div className="header-container">
         <a href="#inicio" className="logo-link" aria-label="Arkosys Tech Solutions Início">
-          <img
-            src="/images/logo.png"
-            alt="Arkosys Tech Solutions - Desenvolvimento de Sistemas & Soluções Digitais"
-            className="header-logo-img"
-            width="220"
-            height="46"
-            decoding="async"
-          />
+          <picture>
+            <source srcSet="/images/icone-512.webp" type="image/webp" />
+            <img src="/images/icone-512.png" alt="Arkosys Tech Solutions" className="header-logo-img" width="46" height="46" decoding="async" />
+          </picture>
+          <span className="marca-texto" aria-hidden="true"><strong>ARKOSYS</strong><small>TECH SOLUTIONS</small></span>
         </a>
         
         {/* Desktop Navigation */}
