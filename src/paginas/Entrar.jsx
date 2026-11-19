@@ -34,7 +34,10 @@ export default function Entrar() {
   return (
     <div className="pn-centro">
       <form className="pn-cartao pn-form" onSubmit={entrar}>
-        <img src="/images/logo.png" alt="Arkosys" className="pn-logo" />
+        <picture>
+          <source srcSet="/images/logo-circulo-512.webp" type="image/webp" />
+          <img src="/images/logo-circulo-512.png" alt="Arkosys Tech Solutions" className="pn-logo-login" width="132" height="132" />
+        </picture>
         <h1>Área restrita</h1>
         <label>E-mail<input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="username" /></label>
         <label>Senha<input type="password" required value={senha} onChange={(e) => setSenha(e.target.value)} autoComplete="current-password" /></label>

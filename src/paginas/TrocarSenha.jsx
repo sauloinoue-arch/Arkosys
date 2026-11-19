@@ -31,6 +31,10 @@ export default function TrocarSenha() {
   return (
     <div className="pn-centro">
       <form className="pn-cartao pn-form" onSubmit={trocar}>
+        <picture>
+          <source srcSet="/images/logo-circulo-512.webp" type="image/webp" />
+          <img src="/images/logo-circulo-512.png" alt="Arkosys Tech Solutions" className="pn-logo-login" width="132" height="132" />
+        </picture>
         <h1>Defina sua senha</h1>
         <p className="pn-mudo">A senha inicial é provisória. Use pelo menos 12 caracteres.</p>
         <label>Nova senha<input type="password" required value={s1} onChange={(e) => setS1(e.target.value)} autoComplete="new-password" /></label>

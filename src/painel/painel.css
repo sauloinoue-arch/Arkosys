@@ -8,6 +8,9 @@
 .pn-texto h2 { margin-top: var(--spacing-4); font-size: 18px; }
 .pn-cartao { background: var(--color-secondary); border: 1px solid var(--pn-borda); border-radius: var(--radius-lg); padding: var(--spacing-4); margin-bottom: var(--spacing-3); }
 .pn-logo { height: 36px; width: auto; }
+/* Logo da tela de acesso: arquivo de 512 px exibido a 132 px — nítido em telas de alta densidade. */
+.pn-logo-login { display: block; width: 132px; height: 132px; margin: 0 auto var(--spacing-2); }
+.pn-form h1 { text-align: center; }
 .pn-form { display: flex; flex-direction: column; gap: var(--spacing-3); min-width: min(380px, 100%); }
 .pn-form label { display: flex; flex-direction: column; gap: var(--spacing-1); font-size: var(--font-size-label); color: var(--color-text-muted); }
 .pn-form input, .pn-form select, .pn-form textarea, .pn-copiar {
