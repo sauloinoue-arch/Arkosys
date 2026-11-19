@@ -23,11 +23,11 @@ function Projetos() {
         <div><span className="pn-mudo">Aceite</span><br />{dataBr(p.dataAceite)}</div>
       </div>
       <h3>Pagamentos</h3>
-      <table className="pn-tabela">
+      <table className="pn-tabela pn-tabela-cartoes">
         <thead><tr><th>#</th><th>Descrição</th><th>Valor</th><th>Vencimento</th><th>Situação</th></tr></thead>
         <tbody>{p.parcelas.map((x) => (
-          <tr key={x.numero}><td>{x.numero}</td><td>{x.descricao}</td><td>{reais(x.valorCentavos)}</td><td>{dataBr(x.vencimento)}</td>
-            <td><Etiqueta tom={x.status === 'paga' ? 'verde' : x.status === 'a_receber' ? 'amarelo' : 'neutro'}>{ROTULOS.parcela[x.status]}</Etiqueta></td></tr>
+          <tr key={x.numero}><td data-rotulo="#">{x.numero}</td><td data-rotulo="Descrição">{x.descricao}</td><td data-rotulo="Valor">{reais(x.valorCentavos)}</td><td data-rotulo="Vencimento">{dataBr(x.vencimento)}</td>
+            <td data-rotulo="Situação"><Etiqueta tom={x.status === 'paga' ? 'verde' : x.status === 'a_receber' ? 'amarelo' : 'neutro'}>{ROTULOS.parcela[x.status]}</Etiqueta></td></tr>
         ))}</tbody>
       </table>
       <h3>Documentos</h3>
@@ -45,7 +45,7 @@ export default function Portal() {
   if (!eu) return <div className="pn-centro"><Carregando /></div>;
   return (
     <div className="pn-portal">
-      <header className="pn-cabecalho">
+      <header className="pn-cabecalho pn-cabecalho-portal">
         <span className="pn-marca">
           <picture>
             <source srcSet="/images/icone-512.webp" type="image/webp" />

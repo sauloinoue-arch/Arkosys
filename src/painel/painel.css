@@ -63,6 +63,15 @@
 .pn-externo { border-left: 3px solid var(--color-text-muted); padding-left: var(--spacing-3); margin: var(--spacing-3) 0; white-space: pre-wrap; }
 .pn-portal { max-width: 960px; margin: 0 auto; padding: var(--spacing-4); }
 
+/* Tabelas do portal viram cartões no celular. */
+@media (max-width: 600px) {
+  .pn-tabela-cartoes thead { display: none; }
+  .pn-tabela-cartoes tr { display: block; border: 1px solid var(--pn-borda); border-radius: var(--radius-lg); padding: var(--spacing-2) var(--spacing-3); margin-bottom: var(--spacing-2); }
+  .pn-tabela-cartoes td { display: flex; justify-content: space-between; gap: var(--spacing-3); border: none; padding: 4px 0; }
+  .pn-tabela-cartoes td::before { content: attr(data-rotulo); color: var(--color-text-muted); }
+  .pn-cabecalho-portal { flex-wrap: wrap; }
+}
+
 @media (max-width: 760px) {
   .pn-layout { grid-template-columns: 1fr; }
   .pn-lateral { flex-direction: row; flex-wrap: wrap; align-items: center; }

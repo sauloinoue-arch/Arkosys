@@ -36,6 +36,13 @@
       "when": 1795094720636,
       "tag": "0004_tabela_precos_v1",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1795098336479,
+      "tag": "0005_descricao_whatsapp",
+      "breakpoints": true
     }
   ]
 }

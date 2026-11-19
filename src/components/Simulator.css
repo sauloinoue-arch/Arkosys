@@ -378,3 +378,6 @@
 .simulator-aceite a { color: var(--color-accent); text-decoration: underline; }
 .simulator-aviso { font-size: var(--font-size-label); color: var(--color-text-muted); border-left: 3px solid var(--color-accent); padding-left: var(--spacing-3); margin: var(--spacing-3) 0; }
 .simulator-erro { color: #ff5f56; font-size: var(--font-size-label); }
+
+.simulator-prazo { font-size: 13px; color: var(--color-text-muted); display: flex; flex-direction: column; gap: 4px; margin-top: var(--spacing-3); }
+.simulator-prazo strong { color: var(--color-text); }

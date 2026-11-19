@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /painel
+Disallow: /portal
+Disallow: /entrar
+Disallow: /trocar-senha
+Disallow: /api/
 
 Sitemap: https://arkosys.com.br/sitemap.xml

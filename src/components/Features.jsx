@@ -4,7 +4,7 @@ import './Features.css';
 const featureData = [
   {
     title: 'Design Premium',
-    desc: 'Surpreenda seus clientes com uma interface moderna, clean e 100% focada em conversão.',
+    desc: 'Interface moderna e limpa, desenhada para o seu cliente encontrar o que precisa sem esforço.',
     icon: '✨'
   },
   {
@@ -14,12 +14,12 @@ const featureData = [
   },
   {
     title: 'Totalmente Responsivo',
-    desc: 'Experiência perfeita e fluida em qualquer dispositivo, seja desktop, tablet ou smartphone.',
+    desc: 'Layout adaptado para computador, tablet e celular.',
     icon: '📱'
   },
   {
-    title: 'Alta Conversão',
-    desc: 'Estratégias de UX e UI aplicadas para transformar mais visitantes em clientes pagantes.',
+    title: 'Foco em Conversão',
+    desc: 'Telas organizadas para levar o visitante ao contato e ao pedido de orçamento.',
     icon: '🚀'
   }
 ];
@@ -46,21 +46,21 @@ const Features = () => {
         {/* Spotlight Showcase: Mobile & Realtime Integration */}
         <div className="features-spotlight glassmorphism">
           <div className="spotlight-content">
-            <span className="spotlight-tag">Módulo Mobile Disponível</span>
+            <span className="spotlight-tag">Módulo Mobile (orçado à parte)</span>
             <h3 className="spotlight-title">Gestão Completa na Palma da sua Mão</h3>
             <p className="spotlight-desc">
-              Além do painel web corporativo, tenha seu próprio aplicativo nativo para Android e iOS.
-              Acompanhe pedidos, receba alertas de novos leads e controle o fluxo financeiro em tempo real onde estiver.
+              Além do painel web, o sistema pode ganhar um aplicativo para Android e iOS.
+              Acompanhe pedidos, receba alertas de novos contatos e consulte o financeiro onde estiver.
             </p>
             <ul className="spotlight-list">
               <li>
-                <span className="spotlight-bullet">✓</span> Notificações instantâneas de vendas e agendamentos
+                <span className="spotlight-bullet">✓</span> Notificações de vendas e agendamentos
               </li>
               <li>
-                <span className="spotlight-bullet">✓</span> Sincronização automática em nuvem sem delay
+                <span className="spotlight-bullet">✓</span> Dados sincronizados com a nuvem
               </li>
               <li>
-                <span className="spotlight-bullet">✓</span> Acesso seguro com criptografia ponta a ponta
+                <span className="spotlight-bullet">✓</span> Acesso com login individual e conexão criptografada (HTTPS)
               </li>
             </ul>
             <div className="spotlight-action">
@@ -71,14 +71,15 @@ const Features = () => {
           </div>
           <div className="spotlight-media">
             <img
-              src="/images/mobile-preview.jpg"
-              alt="Aplicativo Mobile do sistema Arkosys rodando em smartphone mostrando gestão completa na palma da mão"
+              src="/images/mobile-preview.png"
+              alt="Exemplo de tela em celular com dados fictícios"
               className="spotlight-img"
-              width="380"
-              height="600"
+              width="390"
+              height="760"
               loading="lazy"
               decoding="async"
             />
+            <p className="ilustrativa">Imagem ilustrativa com dados fictícios.</p>
           </div>
         </div>
       </div>

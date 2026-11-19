@@ -28,11 +28,10 @@ const Footer = () => {
           <span className="marca-texto" aria-hidden="true"><strong>ARKOSYS</strong><small>TECH SOLUTIONS</small></span>
           </div>
           <p className="footer-tagline">
-            Desenvolvimento e venda de sistemas modernos de alta conversão. Estruturas robustas, seguras e prontas para escalar o seu negócio.
+            Desenvolvimento de sistemas sob medida para pequenas empresas, no Brasil e no exterior.
           </p>
           <div className="footer-status-pill">
-            <span className="status-indicator"></span>
-            <span>Plantão de Atendimento Online</span>
+            <span>Atendimento por WhatsApp e e-mail</span>
           </div>
         </div>
 
@@ -54,8 +53,8 @@ const Footer = () => {
             <span className="contact-icon">✉️</span>
             <div className="contact-meta">
               <span className="contact-label">E-mail Comercial</span>
-              <a href="mailto:bobtechma@gmail.com" className="contact-value-link">
-                bobtechma@gmail.com
+              <a href="mailto:atendimento@arkosys.com.br" className="contact-value-link">
+                atendimento@arkosys.com.br
               </a>
             </div>
           </div>
@@ -88,7 +87,7 @@ const Footer = () => {
           <p>&copy; {new Date().getFullYear()} Arkosys — Desenvolvimento de Sistemas. Todos os direitos reservados.
             {' '}<a href="/privacidade">Aviso de privacidade</a> · <a href="/entrar">Área restrita</a></p>
           <div className="footer-guarantee-note">
-            <span>🔒 Segurança com Criptografia SSL e Dados em Nuvem</span>
+            <span>🔒 Conexão criptografada (HTTPS)</span>
           </div>
         </div>
       </div>

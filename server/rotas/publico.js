@@ -17,6 +17,34 @@ export const VERSAO_AVISO_PRIVACIDADE = 'rascunho-2026-11-19';
 // Parcelamento exibido no simulador: "12x" com acréscimo de 15% (Simulator.jsx, linha 134, versão anterior).
 export const PARCELAMENTO = Object.freeze({ vezes: 12, fatorAcrescimo: 1.15 });
 
+// Validade da oferta a prazo. CDC, art. 54-B, III: no mínimo 2 dias. Valor de 7 dias: decisão a confirmar pelo usuário.
+export const VALIDADE_OFERTA_DIAS = 7;
+
+/** Taxa efetiva mensal implícita no parcelamento (prestação fixa), por bisseção. CDC, art. 52, II e V. */
+export function taxaEfetivaMensal(vezes, fator) {
+  const pmt = fator / vezes; // valor à vista = 1
+  const vp = (i) => (i === 0 ? pmt * vezes : pmt * (1 - (1 + i) ** -vezes) / i);
+  let lo = 0, hi = 1;
+  for (let k = 0; k < 100; k++) { const mid = (lo + hi) / 2; if (vp(mid) > 1) lo = mid; else hi = mid; }
+  return (lo + hi) / 2;
+}
+
+/** Informações exigidas para oferta a prazo (CDC, arts. 52 e 54-B), calculadas no servidor (R1). */
+export function condicoesParcelamento(totalCentavos, agora) {
+  const parcela = Math.round((totalCentavos * PARCELAMENTO.fatorAcrescimo) / PARCELAMENTO.vezes);
+  const totalPrazo = parcela * PARCELAMENTO.vezes;
+  const mensal = taxaEfetivaMensal(PARCELAMENTO.vezes, PARCELAMENTO.fatorAcrescimo);
+  const validade = new Date(agora.getTime() + VALIDADE_OFERTA_DIAS * 86_400_000).toISOString().slice(0, 10);
+  return {
+    vezes: PARCELAMENTO.vezes, periodicidade: 'mensal', parcelaCentavos: parcela,
+    valorAVistaCentavos: totalCentavos, totalAPrazoCentavos: totalPrazo, acrescimoCentavos: totalPrazo - totalCentavos,
+    acrescimoPercentual: Math.round((PARCELAMENTO.fatorAcrescimo - 1) * 10000) / 100,
+    taxaEfetivaMensalPercentual: Math.round(mensal * 10000) / 100,
+    taxaEfetivaAnualPercentual: Math.round(((1 + mensal) ** 12 - 1) * 10000) / 100,
+    meio: 'cartão de crédito', validadeOferta: validade,
+  };
+}
+
 const publico = (request) => ({ id: null, tipo: 'publico', chaveLimite: ipDaRequisicao(request) });
 
 async function tabelaVigente(db) {
@@ -98,8 +126,7 @@ export const rotasPublicas = [
         const [nova] = await db.update(oportunidade).set({ estado: 'orcamento_gerado', atualizadoEm: new Date() }).where(eq(oportunidade.id, op.id)).returning();
         await registrar({ entidade: 'oportunidade', entidadeId: op.id, acao: 'estado:cadastro_site->orcamento_gerado', antes: op, depois: nova });
       }
-      const parcelaCartaoCentavos = Math.round((total * PARCELAMENTO.fatorAcrescimo) / PARCELAMENTO.vezes);
-      return { orcamento: { id: orc.id, itens: linhas, totalCentavos: total, parcelamento: { ...PARCELAMENTO, parcelaCentavos: parcelaCartaoCentavos }, aviso: AVISO_ORCAMENTO } };
+      return { orcamento: { id: orc.id, itens: linhas, totalCentavos: total, parcelamento: condicoesParcelamento(total, agora), aviso: AVISO_ORCAMENTO } };
     },
   },
 ];

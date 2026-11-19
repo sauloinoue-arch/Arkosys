@@ -79,6 +79,14 @@ test('Site: preços vêm da API e o total é calculado no servidor', async () =>
   const orc = await chamar('POST', '/api/publico/orcamento', { corpo: { cadastro: cad.corpo.cadastro, adicionais: ['whatsapp', 'agendamentos'] } });
   assert.equal(orc.corpo.orcamento.totalCentavos, 310000);
   assert.match(orc.corpo.orcamento.aviso, /sem caráter vinculante/);
+  // CDC, art. 52: total a prazo, acréscimo, número de parcelas e taxa efetiva informados.
+  const pz = orc.corpo.orcamento.parcelamento;
+  assert.equal(pz.vezes, 12);
+  assert.equal(pz.totalAPrazoCentavos, pz.parcelaCentavos * 12);
+  assert.equal(pz.acrescimoCentavos, pz.totalAPrazoCentavos - 310000);
+  assert.equal(pz.acrescimoPercentual, 15);
+  assert.ok(pz.taxaEfetivaMensalPercentual > 2 && pz.taxaEfetivaMensalPercentual < 2.5);
+  assert.equal(pz.validadeOferta, '2026-11-26');
   const [op] = await db.select().from(schema.oportunidade).where(eq(schema.oportunidade.id, cad.corpo.cadastro));
   assert.equal(op.estado, 'orcamento_gerado');
   const invalido = await chamar('POST', '/api/publico/orcamento', { corpo: { cadastro: cad.corpo.cadastro, adicionais: ['nao_existe'] } });

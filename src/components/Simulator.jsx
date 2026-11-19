@@ -151,7 +151,14 @@ const Simulator = () => {
                     <div className="summary-total-container">
                       <span className="total-label">Investimento Total</span>
                       <span className="total-amount">{reais(orcamento.totalCentavos)}</span>
-                      <span className="total-installment">ou {orcamento.parcelamento.vezes}x de {reais(orcamento.parcelamento.parcelaCentavos)} no cartão</span>
+                      <span className="total-installment">à vista</span>
+                    </div>
+                    {/* CDC, arts. 52 e 54-B: informações da venda a prazo, todas calculadas pela API. */}
+                    <div className="simulator-prazo">
+                      <p><strong>Ou {orcamento.parcelamento.vezes}x de {reais(orcamento.parcelamento.parcelaCentavos)}</strong> no {orcamento.parcelamento.meio}, em parcelas mensais.</p>
+                      <p>Total a prazo: {reais(orcamento.parcelamento.totalAPrazoCentavos)} — acréscimo de {reais(orcamento.parcelamento.acrescimoCentavos)} ({orcamento.parcelamento.acrescimoPercentual.toLocaleString('pt-BR')}% sobre o valor à vista de {reais(orcamento.parcelamento.valorAVistaCentavos)}).</p>
+                      <p>Taxa efetiva equivalente: {orcamento.parcelamento.taxaEfetivaMensalPercentual.toLocaleString('pt-BR')}% ao mês ({orcamento.parcelamento.taxaEfetivaAnualPercentual.toLocaleString('pt-BR')}% ao ano).</p>
+                      <p>Condições válidas até {new Date(`${orcamento.parcelamento.validadeOferta}T12:00:00Z`).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}. Fornecedor: Arkosys Tech Solutions — atendimento@arkosys.com.br.</p>
                     </div>
                     <p className="simulator-aviso">{orcamento.aviso}</p>
                     {createWhatsAppUrl('') ? (

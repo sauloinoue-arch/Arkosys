@@ -6,7 +6,7 @@ const Hero = () => {
     <section id="inicio" className="hero-section">
       <div className="hero-bg-glow"></div>
       <div className="hero-content">
-        <span className="hero-badge">Tecnologia & Conversão de Elite</span>
+        <span className="hero-badge">Sistemas sob medida</span>
         <h1 className="hero-title">O Sistema Definitivo para Escalar suas Vendas</h1>
         <p className="hero-subtitle">
           Uma plataforma moderna, interativa e feita para conversão. Monte seu pacote ideal e descubra o valor em tempo real.
@@ -22,15 +22,15 @@ const Hero = () => {
             <span className="topbar-dot"></span>
             <span className="topbar-dot"></span>
             <span className="topbar-dot"></span>
-            <span className="showcase-title-tag">painel.seusistema.com.br — Visão Geral</span>
+            <span className="showcase-title-tag">Painel de exemplo — dados fictícios</span>
           </div>
           <div className="showcase-media">
             <img
-              src="/images/dashboard-preview.jpg"
-              alt="Prévia do Painel Administrativo do sistema Arkosys em Dark Mode mostrando dashboard com métricas e gráficos"
+              src="/images/dashboard-preview.png"
+              alt="Exemplo de painel administrativo com dados fictícios"
               className="showcase-img"
               width="1020"
-              height="520"
+              height="534"
               loading="eager"
               decoding="async"
               fetchpriority="high"
@@ -38,7 +38,7 @@ const Hero = () => {
           </div>
           <div className="floating-stat-badge glassmorphism">
             <span className="stat-pulse"></span>
-            <span>Painel em Tempo Real</span>
+            <span>Imagem ilustrativa</span>
           </div>
         </div>
       </div>
