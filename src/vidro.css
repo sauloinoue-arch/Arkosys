@@ -159,6 +159,10 @@ body::before {
   }
 }
 
+/* Listas simples dentro de cartões: marcador dentro da área do cartão. */
+.pn-cartao ul:not(.pn-lista) { padding-left: var(--spacing-4); }
+.pn-cartao ul:not(.pn-lista) li { margin-bottom: var(--spacing-1); }
+
 /* --------------------- Alternativas sem transparência --------------------- */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .glassmorphism, .feature-card.glassmorphism, .base-card, .summary-panel, .hero-showcase,
