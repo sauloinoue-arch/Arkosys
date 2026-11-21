@@ -43,6 +43,13 @@
       "when": 1795098336479,
       "tag": "0005_descricao_whatsapp",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1795274875587,
+      "tag": "0006_descricao_financeiro",
+      "breakpoints": true
     }
   ]
 }
