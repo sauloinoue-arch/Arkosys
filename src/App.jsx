@@ -5,16 +5,17 @@ import Hero from './components/Hero';
 import Features from './components/Features';
 import Simulator from './components/Simulator';
 import Footer from './components/Footer';
+import Protecao from './components/Protecao';
 
 function App() {
   return (
     <div className="app-container">
-      <TechBackground />
+      <Protecao silencioso><TechBackground /></Protecao>
       <Header />
       <main>
-        <Hero />
-        <Features />
-        <Simulator />
+        <Protecao><Hero /></Protecao>
+        <Protecao><Features /></Protecao>
+        <Protecao><Simulator /></Protecao>
       </main>
       <Footer />
     </div>

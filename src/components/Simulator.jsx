@@ -16,7 +16,9 @@ const Simulator = () => {
   const [orcamento, setOrcamento] = useState(null);
 
   useEffect(() => {
-    api.get('/api/publico/precos', { publico: true }).then(setTabela).catch(() => setErroTabela('Não foi possível carregar a tabela de preços agora.'));
+    api.get('/api/publico/precos', { publico: true })
+      .then((t) => { if (!t || !Array.isArray(t.adicionais) || !t.base) throw new Error('resposta inválida'); setTabela(t); })
+      .catch(() => setErroTabela('Não foi possível carregar a tabela de preços agora.'));
   }, []);
 
   const alternar = (codigo) => setSelecionados((p) => (p.includes(codigo) ? p.filter((c) => c !== codigo) : [...p, codigo]));
