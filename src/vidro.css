@@ -107,6 +107,46 @@ body::before {
 .footer { border-width: 1px 0 0 0; border-radius: 0; }
 .phone-chip { -webkit-backdrop-filter: var(--vidro-desfoque-leve); backdrop-filter: var(--vidro-desfoque-leve); }
 
+/* Ícones da marca (cubo do logo + símbolo do recurso) — src/components/IconeCubo.jsx */
+.card-icon {
+  width: 88px; height: 88px; margin-bottom: var(--spacing-4);
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 20px;
+  background: radial-gradient(circle at 50% 35%, rgba(249, 115, 22, 0.18), rgba(249, 115, 22, 0) 70%), var(--vidro-fundo-leve);
+  border: 1px solid rgba(249, 115, 22, 0.22);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.icone-cubo { overflow: visible; filter: drop-shadow(0 6px 14px rgba(249, 115, 22, 0.28)); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease; }
+.icone-cubo-simbolo * { vector-effect: non-scaling-stroke; }
+.feature-card:hover .icone-cubo { transform: translateY(-4px); filter: drop-shadow(0 12px 20px rgba(249, 115, 22, 0.45)); }
+.feature-card:hover .card-icon { border-color: rgba(249, 115, 22, 0.45); }
+
+.spotlight-bullet {
+  display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(249, 115, 22, 0.14); border: 1px solid rgba(249, 115, 22, 0.35);
+  color: var(--color-accent);
+}
+.contact-icon {
+  display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto;
+  width: 40px; height: 40px; margin-top: 0; border-radius: 12px;
+  color: var(--color-accent);
+  background: var(--vidro-fundo-leve); border: 1px solid rgba(249, 115, 22, 0.25);
+}
+
+/* Celular do destaque: imagem do app dentro de uma moldura de aparelho. */
+.spotlight-media { flex-direction: column; gap: var(--spacing-2); }
+.spotlight-img {
+  border: 10px solid #0b0b0b; border-radius: 40px;
+  outline: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 50px rgba(249, 115, 22, 0.18);
+  max-width: 320px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-card:hover .icone-cubo { transform: none; }
+}
+
 /* ------------------------- Acesso, painel e portal ------------------------ */
 .pn-cartao { border-radius: var(--vidro-raio); padding: var(--spacing-5); }
 .pn-cartao.pn-ficha { padding: var(--spacing-3); margin-bottom: var(--spacing-2); }

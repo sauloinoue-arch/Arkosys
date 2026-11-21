@@ -50,7 +50,7 @@ const Footer = () => {
           <h4 className="footer-heading">Canais Oficiais</h4>
           
           <div className="contact-item">
-            <span className="contact-icon">✉️</span>
+            <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5" /><path d="M4 7 L12 13 L20 7" /></svg></span>
             <div className="contact-meta">
               <span className="contact-label">E-mail Comercial</span>
               <a href="mailto:atendimento@arkosys.com.br" className="contact-value-link">
@@ -60,7 +60,7 @@ const Footer = () => {
           </div>
 
           <div className="contact-item">
-            <span className="contact-icon">💬</span>
+            <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 18.5 L5.3 14.8 A8 8 0 1 1 8.6 18 Z" /><path d="M9 11 H9.01 M12 11 H12.01 M15 11 H15.01" /></svg></span>
             <div className="contact-meta">
               <span className="contact-label">Atendimento WhatsApp</span>
               <div className="phone-numbers-list">
