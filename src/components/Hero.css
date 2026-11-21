@@ -5,7 +5,8 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: var(--spacing-6) var(--spacing-4);
+  /* Cabeçalho é fixo (80 px): o topo do conteúdo não pode ficar sob ele. */
+  padding: calc(80px + var(--spacing-6)) var(--spacing-4) var(--spacing-6);
   overflow: hidden;
 }
 

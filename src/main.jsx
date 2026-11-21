@@ -8,6 +8,8 @@ import TrocarSenha from './paginas/TrocarSenha.jsx';
 import Privacidade from './paginas/Privacidade.jsx';
 import Painel from './painel/Painel.jsx';
 import Portal from './portal/Portal.jsx';
+// Camada de vidro importada por último para prevalecer sobre os estilos de componente.
+import './vidro.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

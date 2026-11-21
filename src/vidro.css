@@ -1,0 +1,177 @@
+/* ==========================================================================
+   Vidro (glassmorphism) — camada visual única para site, acesso, painel e portal.
+   Importado por último em src/main.jsx para prevalecer sobre os estilos de
+   componente sem alterá-los. Paleta: src/index.css, linhas 3 a 7.
+   Acessibilidade: textos continuam sobre fundo escuro (contraste AA);
+   sem suporte a backdrop-filter ou com "reduzir transparência", as
+   superfícies voltam a ser opacas.
+   ========================================================================== */
+
+:root {
+  --vidro-fundo: rgba(30, 30, 30, 0.55);
+  --vidro-fundo-forte: rgba(24, 24, 24, 0.72);
+  --vidro-fundo-leve: rgba(255, 255, 255, 0.04);
+  --vidro-borda: rgba(255, 255, 255, 0.09);
+  --vidro-borda-luz: rgba(255, 255, 255, 0.16);
+  --vidro-desfoque: blur(18px) saturate(150%);
+  --vidro-desfoque-leve: blur(10px) saturate(140%);
+  --vidro-sombra: 0 10px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --vidro-raio: 16px;
+  --vidro-raio-peq: 12px;
+}
+
+/* --- Fundo ambiente: dá ao vidro algo para desfocar em todas as telas --- */
+html { background-color: var(--color-dominant); }
+body { background-color: transparent; }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(38rem 38rem at 6% -4%, rgba(249, 115, 22, 0.34), transparent 60%),
+    radial-gradient(30rem 30rem at 96% 30%, rgba(249, 115, 22, 0.20), transparent 62%),
+    radial-gradient(26rem 26rem at 55% 78%, rgba(234, 88, 12, 0.14), transparent 64%),
+    radial-gradient(44rem 30rem at 30% 115%, rgba(255, 255, 255, 0.07), transparent 65%),
+    var(--color-dominant);
+}
+
+/* --- Receita base do vidro --- */
+.glassmorphism,
+.feature-card.glassmorphism,
+.base-card,
+.summary-panel,
+.hero-showcase,
+.footer,
+.pn-cartao,
+.pn-lateral {
+  background: var(--vidro-fundo);
+  -webkit-backdrop-filter: var(--vidro-desfoque);
+  backdrop-filter: var(--vidro-desfoque);
+  border: 1px solid var(--vidro-borda);
+  border-top-color: var(--vidro-borda-luz);
+  box-shadow: var(--vidro-sombra);
+}
+
+/* ---------------------------------- Site ---------------------------------- */
+.features-section,
+.simulator-section { background-color: transparent; }
+
+.header.glassmorphism,
+.glassmorphism.header { border-width: 0 0 1px 0; border-radius: 0; box-shadow: 0 6px 30px rgba(0, 0, 0, 0.35); }
+
+.feature-card.glassmorphism,
+.features-spotlight.glassmorphism,
+.base-card,
+.summary-panel { border-radius: var(--vidro-raio); }
+.features-spotlight.glassmorphism { border-color: rgba(249, 115, 22, 0.25); }
+.feature-card.glassmorphism:hover { border-color: rgba(249, 115, 22, 0.45); box-shadow: 0 16px 40px -12px rgba(249, 115, 22, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.08); }
+
+.hero-showcase { border-radius: var(--vidro-raio); border-color: rgba(249, 115, 22, 0.30); }
+.showcase-topbar { background: rgba(255, 255, 255, 0.04); }
+
+.floating-stat-badge,
+.hero-badge,
+.section-badge,
+.footer-status-pill {
+  -webkit-backdrop-filter: var(--vidro-desfoque-leve);
+  backdrop-filter: var(--vidro-desfoque-leve);
+}
+.floating-stat-badge { background: var(--vidro-fundo-forte); }
+
+.addon-item {
+  background: var(--vidro-fundo-leve);
+  border-color: var(--vidro-borda);
+  border-radius: var(--vidro-raio-peq);
+  -webkit-backdrop-filter: var(--vidro-desfoque-leve);
+  backdrop-filter: var(--vidro-desfoque-leve);
+}
+.addon-item:hover { background: rgba(255, 255, 255, 0.07); }
+.addon-item.active { background: rgba(249, 115, 22, 0.10); border-color: rgba(249, 115, 22, 0.55); }
+
+.btn-outline {
+  background: var(--vidro-fundo-leve);
+  -webkit-backdrop-filter: var(--vidro-desfoque-leve);
+  backdrop-filter: var(--vidro-desfoque-leve);
+  border-color: var(--vidro-borda-luz);
+}
+.btn-primary { background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0)); }
+
+.mobile-overlay {
+  background-color: rgba(18, 18, 18, 0.82);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  backdrop-filter: blur(24px) saturate(150%);
+}
+
+.footer { border-width: 1px 0 0 0; border-radius: 0; }
+.phone-chip { -webkit-backdrop-filter: var(--vidro-desfoque-leve); backdrop-filter: var(--vidro-desfoque-leve); }
+
+/* ------------------------- Acesso, painel e portal ------------------------ */
+.pn-cartao { border-radius: var(--vidro-raio); padding: var(--spacing-5); }
+.pn-cartao.pn-ficha { padding: var(--spacing-3); margin-bottom: var(--spacing-2); }
+.pn-lista .pn-cartao { padding: var(--spacing-3) var(--spacing-4); margin-bottom: 0; }
+.pn-cabecalho + .pn-mudo, .pn-conteudo > .pn-mudo { margin-bottom: var(--spacing-3); }
+.pn-centro .pn-cartao { padding: var(--spacing-6) var(--spacing-5); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(249, 115, 22, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.08); }
+
+.pn-lateral { border-width: 0 1px 0 0; border-radius: 0; position: sticky; top: 0; height: 100vh; }
+.pn-lateral nav a { border-radius: var(--vidro-raio-peq); transition: background 0.2s ease, color 0.2s ease; }
+.pn-lateral nav a.active { background: rgba(249, 115, 22, 0.16); box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.35); }
+.pn-lateral nav a:hover { background: rgba(255, 255, 255, 0.06); }
+
+.pn-acao,
+.pn-ficha,
+.pn-externo {
+  background: var(--vidro-fundo-leve);
+  border: 1px solid var(--vidro-borda);
+  border-radius: var(--vidro-raio-peq);
+}
+.pn-ficha { transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease; }
+.pn-ficha:hover { background: rgba(255, 255, 255, 0.07); border-color: rgba(249, 115, 22, 0.5); transform: translateY(-2px); }
+.pn-externo { border-left: 3px solid var(--color-text-muted); padding: var(--spacing-3); }
+
+.pn-form input, .pn-form select, .pn-form textarea, .pn-copiar {
+  background: rgba(0, 0, 0, 0.28);
+  border-color: var(--vidro-borda-luz);
+  border-radius: var(--vidro-raio-peq);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.pn-form input:focus, .pn-form select:focus, .pn-form textarea:focus { background: rgba(0, 0, 0, 0.38); border-color: rgba(249, 115, 22, 0.6); }
+.pn-form select option { background: var(--color-secondary); }
+
+.pn-tabela th { border-bottom-color: var(--vidro-borda-luz); }
+.pn-tabela tbody tr { transition: background 0.15s ease; }
+.pn-tabela tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
+
+.pn-etiqueta, .pn-selo { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06); }
+
+@media (max-width: 760px) {
+  .pn-lateral { position: static; height: auto; border-width: 0 0 1px 0; }
+}
+@media (max-width: 600px) {
+  .pn-cartao, .pn-centro .pn-cartao { padding: var(--spacing-4) var(--spacing-3); }
+  .pn-tabela-cartoes tr {
+    background: var(--vidro-fundo);
+    -webkit-backdrop-filter: var(--vidro-desfoque-leve);
+    backdrop-filter: var(--vidro-desfoque-leve);
+    border-color: var(--vidro-borda);
+    border-radius: var(--vidro-raio-peq);
+  }
+}
+
+/* --------------------- Alternativas sem transparência --------------------- */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glassmorphism, .feature-card.glassmorphism, .base-card, .summary-panel, .hero-showcase,
+  .footer, .pn-cartao, .pn-lateral, .mobile-overlay, .pn-tabela-cartoes tr { background: var(--color-secondary); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glassmorphism, .feature-card.glassmorphism, .base-card, .summary-panel, .hero-showcase,
+  .footer, .pn-cartao, .pn-lateral, .mobile-overlay, .pn-tabela-cartoes tr, .addon-item, .pn-acao, .pn-ficha {
+    background: var(--color-secondary);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pn-ficha:hover { transform: none; }
+}
